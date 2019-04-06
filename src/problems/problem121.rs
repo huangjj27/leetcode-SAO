@@ -27,22 +27,46 @@
 /// assert_eq!(max_profit(prices), 0);
 /// ```
 pub fn max_profit(prices: Vec<i32>) -> i32 {
-    let len = prices.len();
-    let mut max = 0;
+    use std::cmp::{max, min};
 
-    for i in 0..len {
-        let mut iter_max = 0;
-
-        for j in i + 1..len {
-            if prices[j] - prices[i] > iter_max {
-                iter_max = prices[j] - prices[i];
-            }
-        }
-
-        if iter_max > max {
-            max = iter_max;
-        }
+    if prices.len() <= 1 {
+        return 0;
     }
 
-    max
+    let mut profit = 0;
+    let mut low = prices[0];
+
+    for i in 1..prices.len() {
+        // each time choose a better profit, if supposed to sell today and buy before.
+        profit = max(profit, prices[i] - low);
+
+        // low is the lowest price you have met before today.
+        // update it to keep the probability that you havn't buy today
+        low = min(low, prices[i]);
+    }
+
+    profit
+}
+
+#[cfg(test)]
+mod test {
+    use super::max_profit;
+
+    #[test]
+    fn test_none_prices() {
+        let prices = vec![];
+        assert_eq!(max_profit(prices), 0);
+    }
+
+    #[test]
+    fn test_only_one_price() {
+        let prices = vec![42];
+        assert_eq!(max_profit(prices), 0);
+    }
+
+    #[test]
+    fn test_not_increased_again() {
+        let prices = vec![2, 4, 1];
+        assert_eq!(max_profit(prices), 2);
+    }
 }
