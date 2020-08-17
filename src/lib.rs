@@ -19,6 +19,9 @@ pub mod problems {
     pub mod problem67;
     pub mod problem69;
     pub mod problem7;
+    pub mod problem70;
+    pub mod problem709;
+    pub mod problem733;
 }
 
 pub mod contests {
