@@ -3,6 +3,7 @@
 //! 但"12e"、"1a3.14"、"1.2.3"、"+-5"及"12e+5.4"都不是。
 
 pub fn is_number(s: String) -> bool {
+    let s = s.trim();
     return s.parse::<i32>().is_ok() || s.parse::<f32>().is_ok()
 }
 
@@ -42,5 +43,11 @@ mod test {
         assert!(is_number("31.4e-1".to_string()));
         assert!(!is_number("31.4e".to_string()));
         assert!(!is_number("12e+5.4".to_string()));
+    }
+
+    #[test]
+    fn test_with_spaces() {
+        assert!(is_number("1 ".to_string()));
+        assert!(is_number(" 1".to_string()));
     }
 }
