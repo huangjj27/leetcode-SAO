@@ -24,6 +24,10 @@ pub mod problems {
     pub mod problem733;
 }
 
+pub mod offer {
+    pub mod offer20;
+}
+
 pub mod contests {
     pub mod contest130;
 }
