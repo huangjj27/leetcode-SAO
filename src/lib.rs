@@ -22,6 +22,7 @@ pub mod problems {
     pub mod problem70;
     pub mod problem709;
     pub mod problem733;
+    pub mod problem739;
 }
 
 pub mod offer {
